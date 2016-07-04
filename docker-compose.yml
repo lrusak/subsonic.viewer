@@ -1,0 +1,6 @@
+webapp:
+  image: jazzdd/alpine-flask
+  volumes:
+    - ./:/app
+  ports:
+    - "8000:80"

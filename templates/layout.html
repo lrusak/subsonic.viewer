@@ -1,0 +1,27 @@
+<!doctype html>
+<title>Subsonic</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<div class=page>
+	<div class=metanav>
+		{% if not session.logged_in %} 
+		  <a href="{{ url_for('login') }}">login</a>
+		{% else %}
+    	  <a href="{{ url_for('logout') }}">log out</a>
+  		{% endif %}
+	</div>
+	{% if session.logged_in %}
+		{% if playing %}
+			<img src="data:;base64,{{ image }}" />
+		{% else %}
+			{% if not error %}
+				<h1>Nothing is Playing!</h1>
+			{% else %}
+				<h1>Error!</h1>
+			{% endif %}
+		{% endif %}
+	{% endif %}
+	{% for message in get_flashed_messages() %}
+  		<div class=flash>{{ message }}</div>
+    {% endfor %}
+	{% block body %}{% endblock %}
+</div>
